@@ -119,15 +119,17 @@ function Tiles:around(x, y)
     return found
 end
 
-function Tiles:draw()
+function Tiles:draw(col)
     for i, tile in ipairs(self.tiles) do
         if tile ~= -1 then
-            local x = (i-1)%self.cells_x
-            local y = math.floor((i-1)/self.cells_x)
-            local tx = x*TILE_SIZE
-            local ty = y*TILE_SIZE
-            local type = TILE_NAMES[tile+1]
-            love.graphics.draw(Image[type], TILE_QUADS[type][auto_tile_checks[self.tiles_i[i]]], tx, ty)
+            if (self.col_tiles[TILE_NAMES[tile+1]] ~= nil) == col then
+                local x = (i-1)%self.cells_x
+                local y = math.floor((i-1)/self.cells_x)
+                local tx = x*TILE_SIZE
+                local ty = y*TILE_SIZE
+                local type = TILE_NAMES[tile+1]
+                love.graphics.draw(Image[type], TILE_QUADS[type][auto_tile_checks[self.tiles_i[i]]], tx, ty)
+            end
         end
     end
 end

@@ -27,6 +27,7 @@ return function ()
     TILE_SIZE = 16
     TILE_NAMES = {
         "tile",
+        "tile_back",
     }
 
     DECAL_NAMES = {

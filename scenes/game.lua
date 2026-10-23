@@ -21,9 +21,7 @@ function Game:update(dt)
 end
 
 function Game:draw()
-    love.graphics.setColor(Color.bg)
-    love.graphics.rectangle("fill", 0, 0, Res.w, Res.h)
-    Color.reset()
+    self:draw_bg()
 
     Shaders.shadow:start()
     Camera:start()
