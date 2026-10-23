@@ -1,13 +1,13 @@
-local speed = 2.4
-local air_speed = 2.6
-local gravity = 0.45
-local jump_force = 5
+local speed = 2.0
+local air_speed = 2.2
+local gravity = 0.4
+local jump_force = 4.3
 local max_vy = 6
 local acc_damp = 0.4
 local dec_damp = 0.25
 local falling = 5
 local jump_buffer = 10
-local draw_bounce = 0.4
+local draw_bounce = 0.3
 
 return function (Player)
     function Player:init_movement()
@@ -52,8 +52,8 @@ return function (Player)
 
         if self.falling < falling and Input.down.down then
             self.draw_bounce = -draw_bounce
-            ix = 0
             self.mx = 0
+            ix = 0
         end
 
         self.speed = speed

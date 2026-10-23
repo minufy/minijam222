@@ -14,6 +14,8 @@ return function ()
 
     Audio.new("jump")
 
+    Color.bg = rgb(5, 1, 59)
+
     Camera.x_damp = 0.1
     Camera.y_damp = 0.1
     Camera.shake_damp = 0.3

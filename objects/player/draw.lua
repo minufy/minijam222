@@ -1,7 +1,7 @@
-local bounce_damp = 0.2
+local bounce_damp = 0.15
 
-Animation.new("player_idle", 1, 2, 40)
-Animation.new("player_walk", 1, 2, 10)
+Animation.new("player_idle", 1, 2, 50)
+Animation.new("player_walk", 1, 4, 7)
 Animation.new("player_jump", 1, 1, 0)
 
 return function (Player)
