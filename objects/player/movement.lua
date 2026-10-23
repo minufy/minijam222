@@ -1,6 +1,6 @@
 local speed = 2.0
 local air_speed = 2.2
-local gravity = 0.4
+local gravity = 0.35
 local jump_force = 4.3
 local max_vy = 6
 local acc_damp = 0.4

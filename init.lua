@@ -20,6 +20,10 @@ return function ()
     Camera.y_damp = 0.1
     Camera.shake_damp = 0.3
 
+    FILTERS = {
+        spike = {"spike"}
+    }
+
     TILE_SIZE = 16
     TILE_NAMES = {
         "tile",

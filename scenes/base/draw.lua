@@ -4,6 +4,7 @@ local draw_order = {
     "player",
     "spark_paritcle",
     "tiles",
+    "spike",
 }
 
 return function (Scene)

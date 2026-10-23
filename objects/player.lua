@@ -16,19 +16,20 @@ function Player.new(data)
     self:init_draw()
     self:init_movement()
 
-    self.cam_x = self.x+self.w/2
-    self.cam_y = self.y+self.h/2
-    Camera:offset(Res.w/2, Res.h/2)
+    self:update_cam()
+    Camera:offset(0, 0)
     Camera:set(self.cam_x, self.cam_y)
     Camera:snap_back()
     return self
 end
 
-function Player:update(dt)
-    -- follow player
-    self.cam_x = self.x+self.w/2
-    self.cam_y = self.y+self.h/2
+function Player:update_cam()
+    self.cam_x = math.round_s(self.x+self.w/2, Res.w, 0)
+    self.cam_y = math.round_s(self.y+self.h/2, Res.h, 0)
+end
 
+function Player:update(dt)
+    self:update_cam()
     self:update_collision(dt)
     self:update_draw(dt)
     self:update_movement(dt)

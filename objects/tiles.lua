@@ -138,10 +138,14 @@ function Tiles:auto_tile(t, x, y)
         local mx, my = x+move_x[i], y+move_y[i]
         local j = mx+my*self.cells_x+1
         local mt = self.tiles[j]
-        if self.col_tiles[TILE_NAMES[t+1]] then
-            moves[move_name[i]] = mt == t
+        if mx <= 0 or mx >= self.cells_x or my <= 0 or my >= #self.tiles/self.cells_x then
+            moves[move_name[i]] = true
         else
-            moves[move_name[i]] = mt ~= -1
+            if self.col_tiles[TILE_NAMES[t+1]] then
+                moves[move_name[i]] = mt == t
+            else
+                moves[move_name[i]] = mt ~= -1
+            end
         end
     end
     if not (moves["w"] and moves["a"]) then moves["q"] = false end
@@ -157,5 +161,6 @@ function Tiles:auto_tile(t, x, y)
     end
     return pattern
 end
+
 
 return Tiles
