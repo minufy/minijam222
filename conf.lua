@@ -1,4 +1,4 @@
-WINDOW_W = 320
+WINDOW_W = 280
 WINDOW_H = 240
 CONSOLE = os.getenv("CONSOLE") == "true"
 

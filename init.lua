@@ -26,6 +26,12 @@ return function ()
     }
 
     DECAL_NAMES = {
-
+        "grass",
+        "grass2",
+        "grass3",
+        "flower",
+        "flower2",
+        "mushroom",
+        "mushroom2",
     }
 end
