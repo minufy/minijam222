@@ -27,7 +27,7 @@ function Soul:update(dt)
     end
 end
 
-local light_radius = 20
+local light_radius = 30
 function Soul:draw()
     if self.active then
         love.graphics.setColor(1, 1, 1, 0.03)
