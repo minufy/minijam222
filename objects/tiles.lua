@@ -66,7 +66,6 @@ Tiles.__index = Tiles
 SetType(Tiles, "tiles")
 
 local around_offsets
-GROUND_LEVEL = 0
 
 function Tiles.new(data)
     local self = setmetatable({}, Tiles)
@@ -96,7 +95,6 @@ function Tiles:init_tiles()
             local x = (i-1)%self.cells_x
             local y = math.floor((i-1)/self.cells_x)
             self.tiles_i[i] = self:auto_tile(tile, x, y)
-            GROUND_LEVEL = math.max(GROUND_LEVEL, y*TILE_SIZE)
         end
     end
 end

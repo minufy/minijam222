@@ -13,6 +13,10 @@ return function (Player)
         Game:dist(self, FILTERS.spike, self.col_spike, dists.spike)
         Game:dist(self, FILTERS.soul, self.col_soul, dists.soul)
         Game:dist(self, FILTERS.checkpoint, self.col_checkpoint, dists.checkpoint)
+
+        if self.y > Game:tile_height() then
+            self:die()
+        end
     end
 
     function Player:col_spike(other)
