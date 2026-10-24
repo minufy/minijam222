@@ -5,6 +5,7 @@ local draw_order = {
     "spark_paritcle",
     "player",
     "soul",
+    "checkpoint",
     "tiles",
     "spike",
 }

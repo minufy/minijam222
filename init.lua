@@ -23,6 +23,7 @@ return function ()
     FILTERS = {
         spike = {"spike"},
         soul = {"soul"},
+        checkpoint = {"checkpoint"},
     }
 
     TILE_SIZE = 16

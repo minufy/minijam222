@@ -6,6 +6,7 @@ require("scenes.base.update")(Game)
 
 function Game:init(level)
     self.current_level = level or 1
+    self.last_checkpoint = nil
     Level:init()
     self:reset()
 end
@@ -47,6 +48,9 @@ end
 function Game:reset()
     self.objects = {}
     Level:load_level(tostring(self.current_level), self)
+    if self.last_checkpoint then
+        self.player:start_checkpoint(self.last_checkpoint)
+    end
 end
 
 function Game:tile_width()
@@ -57,6 +61,10 @@ end
 function Game:tile_height()
     local tiles = self.objects.tiles[1]
     return tiles.cells_y*TILE_SIZE
+end
+
+function Game:set_checkpoint(checkpoint)
+	self.last_checkpoint = {x = checkpoint.x, y = checkpoint.y}
 end
 
 return Game

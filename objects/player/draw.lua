@@ -1,5 +1,6 @@
 local bounce_damp = 0.15
 local light_radius = 40
+local levitate_radius = 16
 
 Animation.new("player_idle", 1, 2, 50)
 Animation.new("player_walk", 1, 4, 7)
@@ -37,23 +38,25 @@ return function (Player)
     end
 
     function Player:draw_draw()
-        love.graphics.setColor(1, 1, 1, 0.03)
         love.graphics.setBlendMode("add")
+
+        love.graphics.setColor(1, 1, 1, 0.03)
         love.graphics.circle("fill", self.x+self.w/2, self.y+self.h/2, light_radius*0.6)
         love.graphics.circle("fill", self.x+self.w/2, self.y+self.h/2, light_radius)
-        love.graphics.setBlendMode("alpha")
         Color.reset()
 
-        if self.soul_mode then
-            local ox = TILE_SIZE/2-self.w/2
-            local oy = TILE_SIZE/2-self.h/2
-            love.graphics.draw(Image.player_soul, self.x-ox, self.y-oy)
-        else
-            local sx = (1-self.draw_bounce)
-            local sy = (1+self.draw_bounce)
-            local ox = self.w*(1-self.flip*sx)/2
-            local oy = -self.draw_bounce*self.h
-            love.graphics.draw(Animation.get_frame("player_"..self.anim_state), self.x+ox, self.y+oy, 0, self.flip*sx, sy)
+        if self.levitating then
+            love.graphics.setColor(1, 1, 1, 0.3)
+            love.graphics.arc("fill", self.x+self.w/2, self.y+self.h/2, levitate_radius, 0, self.levitate_timer/LEVITATE_TIME*math.pi*2)
+            Color.reset()
         end
+
+        love.graphics.setBlendMode("alpha")
+
+        local sx = (1-self.draw_bounce)
+        local sy = (1+self.draw_bounce)
+        local ox = self.w*(1-self.flip*sx)/2
+        local oy = -self.draw_bounce*self.h
+        love.graphics.draw(Animation.get_frame("player_"..self.anim_state), self.x+ox, self.y+oy, 0, self.flip*sx, sy)
     end
 end

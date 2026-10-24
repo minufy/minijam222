@@ -17,10 +17,22 @@ function Player.new(data)
     self:init_movement()
 
     self:update_cam()
+    self:init_cam()
+    Game.player = self
+    return self
+end
+
+function Player:init_cam()
     Camera:offset(Res.w/2, Res.h/2)
     Camera:set(self.cam_x, self.cam_y)
     Camera:snap_back()
-    return self
+end
+
+function Player:start_checkpoint(checkpoint)
+	self.x = checkpoint.x
+	self.y = checkpoint.y+TILE_SIZE-self.h
+    self:update_cam()
+    self:init_cam()
 end
 
 function Player:update_cam()

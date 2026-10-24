@@ -5,13 +5,12 @@ local jump_force = 4.2
 local max_vy = 6
 local acc_damp = 0.4
 local dec_damp = 0.25
-local soul_speed = 1.9
-local soul_acc_damp = 0.2
-local soul_dec_damp = 0.3
 local falling = 5
 local jump_buffer = 10
 local draw_bounce = 0.3
-local wall_bounce = 0.7
+local levitate_force = 0.9
+
+LEVITATE_TIME = 100
 
 return function (Player)
     function Player:init_movement()
@@ -22,7 +21,8 @@ return function (Player)
         self.gravity = gravity
         self.speed = speed
 
-        self.soul_mode = false
+        self.levitate_timer = 0
+        self.levitating = false
 
         self.draw_bounce = 0
         self.walk_timer = Timer.new(8)
@@ -125,50 +125,22 @@ return function (Player)
         end
     end
 
-    function Player:soul_move(dt)
-        local ix = 0
-        if Input.right.down then
-            ix = ix+1
-        end
-        if Input.left.down then
-            ix = ix-1
-        end
-        if ix == 0 then
-            self.mx = self.mx+(soul_speed*ix-self.mx)*soul_dec_damp*dt
-        else
-            self.mx = self.mx+(soul_speed*ix-self.mx)*soul_acc_damp*dt
-        end
-        self.x = self.x+self.mx*dt
-        if Game:col_tiles(self, self.col_x) then
-            self.mx = -self.mx*wall_bounce
-        end
-
-        local iy = 0
-        if Input.down.down then
-            iy = iy+1
-        end
-        if Input.up.down then
-            iy = iy-1
-        end
-        if iy == 0 then
-            self.vy = self.vy+(soul_speed*iy-self.vy)*soul_dec_damp*dt
-        else
-            self.vy = self.vy+(soul_speed*iy-self.vy)*soul_acc_damp*dt
-        end
-        self.y = self.y+self.vy*dt
-        if Game:col_tiles(self, self.col_y) then
-            self.vy = -self.vy*wall_bounce
-        end
-    end
-
     function Player:update_movement(dt)
-        if self.soul_mode then
-            self:soul_move(dt)
-        else
-            self:move_x(dt)
-            self:move_y(dt)
-            self:update_anim_state()
+        local levitating = self.levitate_timer > 0
+        if not levitating and self.levitating then
+            Camera:shake(3)
+            for _ = 1, 4 do
+                Game:add(Particle.new(self.x+self.w/2, self.y+self.h, math.random(-15, 15), math.random(-15, 15), math.random(2, 6)))
+            end
         end
+        self.levitating = levitating
+        if self.levitating then
+            self.levitate_timer = self.levitate_timer-dt
+            self.vy = math.min(self.vy, -levitate_force)
+        end
+        self:move_x(dt)
+        self:move_y(dt)
+        self:update_anim_state()
     end
 
     function Player:jump()
@@ -185,10 +157,10 @@ return function (Player)
     end
 
     function Player:soul_activate()
-        self.soul_mode = true
+        self.levitate_timer = LEVITATE_TIME
         Camera:shake(3)
         for _ = 1, 4 do
-            Game:add(Particle.new(self.x+self.w/2, self.y+self.h, math.random(-15, 15), math.random(-15, 15), math.random(6, 10)))
+            Game:add(Particle.new(self.x+self.w/2, self.y+self.h, math.random(-15, 15), math.random(-15, 15), math.random(2, 6)))
         end
     end
 end
