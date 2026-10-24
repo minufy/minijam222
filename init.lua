@@ -8,7 +8,7 @@ return function ()
 
     Input.right = Input.new({"right", "d"})
     Input.left = Input.new({"left", "a"})
-    -- Input.up = Input.new({"up", "w"})
+    Input.up = Input.new({"up", "w"})
     Input.down = Input.new({"down", "s"})
     Input.jump = Input.new({"space", "up", "w"})
 
@@ -17,11 +17,12 @@ return function ()
     Color.bg = rgb(5, 1, 59)
 
     Camera.x_damp = 0.1
-    Camera.y_damp = 0.1
+    Camera.y_damp = 0.05
     Camera.shake_damp = 0.3
 
     FILTERS = {
-        spike = {"spike"}
+        spike = {"spike"},
+        soul = {"soul"},
     }
 
     TILE_SIZE = 16

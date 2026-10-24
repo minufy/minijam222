@@ -4,11 +4,13 @@ local light_radius = 40
 Animation.new("player_idle", 1, 2, 50)
 Animation.new("player_walk", 1, 4, 7)
 Animation.new("player_jump", 1, 1, 0)
+Image.new("player_soul")
 
 return function (Player)
     function Player:init_draw()
         self.flip = 1
         self.anim_state = "idle"
+        self.particle_timer = Timer.new(4)
     end
 
     function Player:update_draw(dt)
@@ -26,6 +28,12 @@ return function (Player)
         end
 
         self.draw_bounce = self.draw_bounce-self.draw_bounce*bounce_damp*dt
+
+        if self.soul_mode then
+            if self.particle_timer:run(dt) then
+                Game:add(Particle.new(self.x+self.w/2, self.y+self.h/2, math.random(-15, 15), math.random(-15, 15), math.random(2, 4)))
+            end
+        end
     end
 
     function Player:draw_draw()
@@ -36,10 +44,16 @@ return function (Player)
         love.graphics.setBlendMode("alpha")
         Color.reset()
 
-        local sx = (1-self.draw_bounce)
-        local sy = (1+self.draw_bounce)
-        local ox = self.w*(1-self.flip*sx)/2
-        local oy = -self.draw_bounce*self.h
-        love.graphics.draw(Animation.get_frame("player_"..self.anim_state), self.x+ox, self.y+oy, 0, self.flip*sx, sy)
+        if self.soul_mode then
+            local ox = TILE_SIZE/2-self.w/2
+            local oy = TILE_SIZE/2-self.h/2
+            love.graphics.draw(Image.player_soul, self.x-ox, self.y-oy)
+        else
+            local sx = (1-self.draw_bounce)
+            local sy = (1+self.draw_bounce)
+            local ox = self.w*(1-self.flip*sx)/2
+            local oy = -self.draw_bounce*self.h
+            love.graphics.draw(Animation.get_frame("player_"..self.anim_state), self.x+ox, self.y+oy, 0, self.flip*sx, sy)
+        end
     end
 end

@@ -1,5 +1,6 @@
 local dists = {
     spike = TILE_SIZE*0.5,
+    soul = TILE_SIZE*0.8,
 }
 
 return function (Player)
@@ -9,10 +10,18 @@ return function (Player)
 
     function Player:update_collision(dt)
         Game:dist(self, FILTERS.spike, self.col_spike, dists.spike)
+        Game:dist(self, FILTERS.soul, self.col_soul, dists.soul)
     end
 
     function Player:col_spike(other)
         self:die()
+    end
+
+    function Player:col_soul(other)
+        if other.active then
+            self:soul_activate()
+            other:activate()
+        end
     end
 
     function Player:die()

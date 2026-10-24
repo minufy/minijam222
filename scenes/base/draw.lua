@@ -2,8 +2,9 @@ local draw_order = {
     "tiles_back",
     "decal",
     "particle",
-    "player",
     "spark_paritcle",
+    "player",
+    "soul",
     "tiles",
     "spike",
 }
