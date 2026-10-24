@@ -17,15 +17,15 @@ function Player.new(data)
     self:init_movement()
 
     self:update_cam()
-    Camera:offset(0, 0)
+    Camera:offset(Res.w/2, Res.h/2)
     Camera:set(self.cam_x, self.cam_y)
     Camera:snap_back()
     return self
 end
 
 function Player:update_cam()
-    self.cam_x = math.round_s(self.x+self.w/2, Res.w, 0)
-    self.cam_y = math.round_s(self.y+self.h/2, Res.h, 0)
+    self.cam_x = math.clamp(self.x+self.w/2, Res.w/2, Game:tile_width()-Res.w/2)
+    self.cam_y = math.clamp(self.y+self.h/2, Res.h/2, Game:tile_height()-Res.h/2)
 end
 
 function Player:update(dt)

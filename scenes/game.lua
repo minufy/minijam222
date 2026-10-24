@@ -49,4 +49,14 @@ function Game:reset()
     Level:load_level(tostring(self.current_level), self)
 end
 
+function Game:tile_width()
+    local tiles = self.objects.tiles[1]
+    return tiles.cells_x*TILE_SIZE
+end
+
+function Game:tile_height()
+    local tiles = self.objects.tiles[1]
+    return tiles.cells_y*TILE_SIZE
+end
+
 return Game

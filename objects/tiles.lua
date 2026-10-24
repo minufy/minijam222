@@ -140,7 +140,7 @@ function Tiles:auto_tile(t, x, y)
         local mx, my = x+move_x[i], y+move_y[i]
         local j = mx+my*self.cells_x+1
         local mt = self.tiles[j]
-        if mx <= 0 or mx >= self.cells_x or my <= 0 or my >= #self.tiles/self.cells_x then
+        if mx <= 0 or mx >= self.cells_x or my <= 0 or my >= self.cells_y then
             moves[move_name[i]] = true
         else
             if self.col_tiles[TILE_NAMES[t+1]] then
