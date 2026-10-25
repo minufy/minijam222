@@ -3,6 +3,9 @@ Soul.__index = Soul
 
 Image.new("soul")
 
+local light_radius = 30
+local deactive_time = 150
+
 function Soul.new(data)
     local self = setmetatable({}, Soul)
     self.x = data.x
@@ -12,6 +15,11 @@ function Soul.new(data)
     self.particle_timer = Timer.new(4)
     self.deactive_timer = 0
     self.active = true
+
+    self.cam_x = self.x-light_radius
+    self.cam_y = self.y-light_radius
+    self.cam_w = self.w+light_radius*2
+    self.cam_h = self.h+light_radius*2
     return self
 end
 
@@ -20,6 +28,11 @@ function Soul:update(dt)
         self.deactive_timer = self.deactive_timer-dt
         self.active = false
     else
+        if not self.active then
+            for _ = 1, 4 do
+                Game:add(Particle.new(self.x+self.w/2, self.y+self.h/2, math.random(-20, 20), math.random(-20, 20), math.random(8, 10)))
+            end
+        end
         if self.particle_timer:run(dt) then
             Game:add(Particle.new(self.x+self.w/2, self.y+self.h/2, math.random(-10, 10), math.random(-10, 10), math.random(2, 4)))
         end
@@ -27,7 +40,6 @@ function Soul:update(dt)
     end
 end
 
-local light_radius = 30
 function Soul:draw()
     if self.active then
         love.graphics.setColor(1, 1, 1, 0.03)
@@ -44,7 +56,6 @@ function Soul:draw()
     end
 end
 
-local deactive_time = 100
 function Soul:activate()
 	self.deactive_timer = deactive_time
 end

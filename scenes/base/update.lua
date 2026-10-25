@@ -15,4 +15,20 @@ return function (Scene)
             end
         end
     end
+
+    function Scene:set_checkpoint(checkpoint)
+    	self.last_checkpoint = {x = checkpoint.x, y = checkpoint.y}
+    end
+
+    function Scene:get_key(key)
+        local connected = self.connected[key.id]
+        if connected then
+            connected:activate()
+            self.connected[key.id] = nil
+        end
+    end
+
+    function Scene:register_connection(object)
+        self.connected[object.id] = object
+    end
 end

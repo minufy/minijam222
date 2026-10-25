@@ -47,6 +47,7 @@ end
 
 function Game:reset()
     self.objects = {}
+    self.connected = {}
     Level:load_level(tostring(self.current_level), self)
     if self.last_checkpoint then
         self.player:start_checkpoint(self.last_checkpoint)
@@ -61,10 +62,6 @@ end
 function Game:tile_height()
     local tiles = self.objects.tiles[1]
     return tiles.cells_y*TILE_SIZE
-end
-
-function Game:set_checkpoint(checkpoint)
-	self.last_checkpoint = {x = checkpoint.x, y = checkpoint.y}
 end
 
 return Game

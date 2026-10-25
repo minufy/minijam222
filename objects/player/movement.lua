@@ -2,13 +2,15 @@ local speed = 2.0
 local air_speed = 2.2
 local gravity = 0.38
 local jump_force = 4.2
-local max_vy = 6
+local max_vy = 5
 local acc_damp = 0.4
 local dec_damp = 0.25
 local falling = 5
 local jump_buffer = 10
 local draw_bounce = 0.3
-local levitate_force = 0.9
+local levitate_vy = 0.6
+local levitate_boost = 1.5
+local vy_damp = 0.1
 
 LEVITATE_TIME = 100
 
@@ -17,7 +19,7 @@ return function (Player)
         self.mx = 0
         self.vy = 0
         self.falling = 999
-        self.jump_buffer = 999
+        self.jump_buffer = 9996
         self.gravity = gravity
         self.speed = speed
 
@@ -78,7 +80,7 @@ return function (Player)
         end
 
         self.x = self.x+self.mx*dt
-        local col_x = Game:col_tiles(self, self.col_x)
+        local col_x = Game:col_tiles(self, self.col_x) or Game:col(self, FILTERS.solid, self.col_x)
 
         if col_x then
             self.mx = 0
@@ -93,12 +95,17 @@ return function (Player)
     end
 
     function Player:move_y(dt)
-        self.vy = self.vy+self.gravity*dt
-        if self.vy >= max_vy then
-            self.vy = max_vy
+        if self.levitating then
+            self.vy = self.vy+(-levitate_vy-self.vy)*vy_damp*dt
+        else
+            self.vy = self.vy+self.gravity*dt
+            if self.vy >= max_vy then
+                self.vy = max_vy
+            end
         end
         self.y = self.y+self.vy*dt
         Game:col_tiles(self, self.col_y)
+        Game:col(self, FILTERS.solid, self.col_y)
         self.falling = self.falling+dt
         self.jump_buffer = self.jump_buffer+dt
 
@@ -136,7 +143,6 @@ return function (Player)
         self.levitating = levitating
         if self.levitating then
             self.levitate_timer = self.levitate_timer-dt
-            self.vy = math.min(self.vy, -levitate_force)
         end
         self:move_x(dt)
         self:move_y(dt)
@@ -158,9 +164,10 @@ return function (Player)
 
     function Player:soul_activate()
         self.levitate_timer = LEVITATE_TIME
+        self.vy = -math.abs(self.vy)*levitate_boost
         Camera:shake(3)
         for _ = 1, 4 do
-            Game:add(Particle.new(self.x+self.w/2, self.y+self.h, math.random(-15, 15), math.random(-15, 15), math.random(2, 6)))
+            Game:add(Particle.new(self.x+self.w/2, self.y+self.h, math.random(-15, 15), math.random(-15, 15), math.random(8, 10)))
         end
     end
 end

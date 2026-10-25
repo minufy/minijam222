@@ -30,7 +30,7 @@ return function (Player)
 
         self.draw_bounce = self.draw_bounce-self.draw_bounce*bounce_damp*dt
 
-        if self.soul_mode then
+        if self.levitating then
             if self.particle_timer:run(dt) then
                 Game:add(Particle.new(self.x+self.w/2, self.y+self.h/2, math.random(-15, 15), math.random(-15, 15), math.random(2, 4)))
             end

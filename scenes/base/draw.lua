@@ -6,6 +6,8 @@ local draw_order = {
     "player",
     "soul",
     "checkpoint",
+    "key",
+    "door",
     "tiles",
     "spike",
 }
@@ -31,6 +33,10 @@ return function (Scene)
             elseif objects ~= nil then
                 for _, object in ipairs(objects) do
                     local x, y, w, h = object.x, object.y, object.w, object.h
+                    if object.cam_x then x = object.cam_x end
+                    if object.cam_y then y = object.cam_y end
+                    if object.cam_w then w = object.cam_w end
+                    if object.cam_h then h = object.cam_h end
                     if object.draw then
                         if Camera:check_vis(x, y, w, h) then
 	                        object:draw()

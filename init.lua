@@ -24,6 +24,8 @@ return function ()
         spike = {"spike"},
         soul = {"soul"},
         checkpoint = {"checkpoint"},
+        key = {"key"},
+        solid = {"door"},
     }
 
     TILE_SIZE = 16

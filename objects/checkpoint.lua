@@ -3,6 +3,8 @@ Checkpoint.__index = Checkpoint
 
 Image.new("checkpoint")
 
+local light_radius = 30
+
 function Checkpoint.new(data)
     local self = setmetatable({}, Checkpoint)
     self.x = data.x
@@ -10,10 +12,14 @@ function Checkpoint.new(data)
     self.w = Image.checkpoint:getWidth()
     self.h = Image.checkpoint:getHeight()
     self.active = true
+
+    self.cam_x = self.x-light_radius
+    self.cam_y = self.y-light_radius
+    self.cam_w = self.w+light_radius*2
+    self.cam_h = self.h+light_radius*2
     return self
 end
 
-local light_radius = 30
 function Checkpoint:draw()
     if self.active then
         love.graphics.setColor(1, 1, 1, 0.03)
