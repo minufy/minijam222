@@ -19,7 +19,7 @@ return function ()
     Audio.new("key", 0.3)
     Audio.new("checkpoint", 0.6)
     Audio.new("soul", 0.3)
-    Audio.new("soul_end", 0.3)
+    Audio.new("soul_end", 0.2)
     Audio.new("soul_reactive", 0.05)
     Audio.new("music", 0.2, {type = "stream", channel = "music", loop = true})
 

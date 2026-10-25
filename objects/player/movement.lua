@@ -145,7 +145,7 @@ return function (Player)
     function Player:update_movement(dt)
         local levitating = self.levitate_timer > 0
         if not levitating and self.levitating then
-            Audio.play("soul_end")
+            Audio.play("soul_end", RandomPitch())
             Camera:shake(3)
             for _ = 1, 4 do
                 Game:add(Particle.new(self.x+self.w/2, self.y+self.h, math.random(-15, 15), math.random(-15, 15), math.random(2, 6)))

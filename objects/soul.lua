@@ -32,7 +32,7 @@ function Soul:update(dt)
             for _ = 1, 4 do
                 Game:add(Particle.new(self.x+self.w/2, self.y+self.h/2, math.random(-20, 20), math.random(-20, 20), math.random(8, 10)))
             end
-            Audio.play("soul_reactive")
+            Audio.play("soul_reactive", RandomPitch())
         end
         if self.particle_timer:run(dt) then
             Game:add(Particle.new(self.x+self.w/2, self.y+self.h/2, math.random(-10, 10), math.random(-10, 10), math.random(2, 4)))
@@ -59,7 +59,7 @@ end
 
 function Soul:activate()
 	self.deactive_timer = deactive_time
-	Audio.play("soul")
+	Audio.play("soul", RandomPitch())
 end
 
 return Soul

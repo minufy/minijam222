@@ -37,7 +37,7 @@ function Checkpoint:draw()
 end
 
 function Checkpoint:activate()
-    Audio.play("checkpoint")
+    Audio.play("checkpoint", RandomPitch())
 	self.active = false
 end
 
