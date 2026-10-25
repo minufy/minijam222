@@ -42,7 +42,7 @@ end
 
 function Soul:draw()
     if self.active then
-        love.graphics.setColor(1, 1, 1, 0.03)
+        love.graphics.setColor(1, 1, 1, LIGHT_ALPHA)
         love.graphics.setBlendMode("add")
         love.graphics.circle("fill", self.x+self.w/2, self.y+self.h/2, light_radius*0.6)
         love.graphics.circle("fill", self.x+self.w/2, self.y+self.h/2, light_radius)

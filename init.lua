@@ -18,8 +18,9 @@ return function ()
 
     Camera.x_damp = 0.1
     Camera.y_damp = 0.05
-    Camera.shake_damp = 0.2
+    Camera.shake_damp = 0.25
 
+    LIGHT_ALPHA = 0.02
     FILTERS = {
         spike = {"spike"},
         soul = {"soul"},
