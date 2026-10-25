@@ -33,6 +33,7 @@ function Key:draw()
 end
 
 function Key:die()
+    Audio.play("key")
 	self.remove = true
 end
 

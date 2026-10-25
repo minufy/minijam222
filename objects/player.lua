@@ -12,9 +12,9 @@ function Player.new(data)
     self.w = Image.player_idle1:getWidth()
     self.h = Image.player_idle1:getHeight()
 
-    self:init_collision()
     self:init_draw()
     self:init_movement()
+    self:init_collision()
 
     self:update_cam()
     self:init_cam()
@@ -30,9 +30,10 @@ end
 
 function Player:start_checkpoint(checkpoint)
 	self.x = checkpoint.x
-	self.y = checkpoint.y+TILE_SIZE-self.h
+	self.y = checkpoint.y+TILE_SIZE*1.5-self.h
     self:update_cam()
     self:init_cam()
+    self:init_collision()
 end
 
 function Player:update_cam()

@@ -12,7 +12,16 @@ return function ()
     Input.down = Input.new({"down", "s"})
     Input.jump = Input.new({"space", "up", "w"})
 
-    Audio.new("jump")
+    Audio.new("die", 0.2)
+    Audio.new("jump", 0.3)
+    Audio.new("land", 0.1)
+    Audio.new("walk", 0.1)
+    Audio.new("key", 0.3)
+    Audio.new("checkpoint", 0.6)
+    Audio.new("soul", 0.3)
+    Audio.new("soul_end", 0.3)
+    Audio.new("soul_reactive", 0.05)
+    Audio.new("music", 0.2, {type = "stream", channel = "music", loop = true})
 
     Color.bg = rgb(5, 1, 59)
 

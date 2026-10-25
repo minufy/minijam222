@@ -22,6 +22,7 @@ return function (Player)
         self.jump_buffer = 9996
         self.gravity = gravity
         self.speed = speed
+        self.land = true
 
         self.levitate_timer = 0
         self.levitating = false
@@ -89,7 +90,7 @@ return function (Player)
         if ix ~= 0 and self.falling <= falling and col_x == false then
             if self.walk_timer:run(dt) then
                 Game:add(Particle.new(self.x+self.w/2, self.y+self.h, ix*math.random(0, 10), math.random(-5, 0), math.random(2, 4)))
-                -- Audio.play("walk")
+                Audio.play("walk", RandomPitch())
             end
         end
     end
@@ -108,6 +109,15 @@ return function (Player)
         Game:col(self, FILTERS.solid, self.col_y)
         self.falling = self.falling+dt
         self.jump_buffer = self.jump_buffer+dt
+
+        if self.falling < falling then
+            if not self.land then
+               	self.land = true
+                Audio.play("land", RandomPitch())
+            end
+        else
+            self.land = false
+        end
 
         if Input.jump.pressed then
             self.jump_buffer = 0
@@ -135,6 +145,7 @@ return function (Player)
     function Player:update_movement(dt)
         local levitating = self.levitate_timer > 0
         if not levitating and self.levitating then
+            Audio.play("soul_end")
             Camera:shake(3)
             for _ = 1, 4 do
                 Game:add(Particle.new(self.x+self.w/2, self.y+self.h, math.random(-15, 15), math.random(-15, 15), math.random(2, 6)))
@@ -152,7 +163,7 @@ return function (Player)
     function Player:jump()
         if self.falling <= falling then
             self.vy = -jump_force
-            Audio.play("jump")
+            Audio.play("jump", RandomPitch())
             self.draw_bounce = draw_bounce
             self.falling = 999
             self.jump_buffer = 999

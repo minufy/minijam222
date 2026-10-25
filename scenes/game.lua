@@ -4,6 +4,7 @@ require("scenes.base.draw")(Game)
 require("scenes.base.physics")(Game)
 require("scenes.base.update")(Game)
 
+Audio.play("music")
 function Game:init(level)
     self.current_level = level or 1
     self.last_checkpoint = nil

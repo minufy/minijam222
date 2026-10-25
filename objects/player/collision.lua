@@ -5,7 +5,7 @@ local dists = {
 
 return function (Player)
     function Player:init_collision()
-
+        Game:dist(self, FILTERS.checkpoint, self.col_init_checkpoint, dists.item)
     end
 
     function Player:update_collision(dt)
@@ -42,6 +42,10 @@ return function (Player)
         end
     end
 
+    function Player:col_init_checkpoint(other)
+        other.active = false
+    end
+
     function Player:get_key(key)
         Game:get_key(key)
         for _ = 1, 4 do
@@ -67,6 +71,6 @@ return function (Player)
         SM:set_fade(function ()
             Game:reset()
         end)
-        -- Audio.play("die")
+        Audio.play("die", RandomPitch())
     end
 end
