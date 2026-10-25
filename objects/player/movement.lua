@@ -12,7 +12,7 @@ local levitate_vy = 0.6
 local levitate_boost = 1.5
 local vy_damp = 0.1
 
-LEVITATE_TIME = 90
+LEVITATE_TIME = 105
 
 return function (Player)
     function Player:init_movement()
