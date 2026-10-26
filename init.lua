@@ -1,7 +1,7 @@
 return function ()
     love.graphics.setDefaultFilter("nearest", "nearest")
     love.graphics.setLineStyle("rough")
-    Font = love.graphics.newFont("assets/fonts/Galmuri9.ttf", 10)
+    Font = love.graphics.newFont("assets/fonts/Galmuri7.ttf", 8)
 
     Input.refresh = Input.new({"f5"})
     Input.fullscreen = Input.new({"f11"})
@@ -12,6 +12,7 @@ return function ()
     Input.down = Input.new({"down", "s"})
     Input.jump = Input.new({"space", "up", "w"})
 
+    Audio.new("fade", 0.2)
     Audio.new("die", 0.2)
     Audio.new("jump", 0.3)
     Audio.new("land", 0.1)

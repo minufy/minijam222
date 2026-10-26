@@ -9,6 +9,7 @@ local draw_order = {
     "key",
     "door",
     "tiles",
+    "text",
     "spike",
     "moving_spike",
 }
