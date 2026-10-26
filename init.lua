@@ -22,6 +22,7 @@ return function ()
     Audio.new("soul", 0.3)
     Audio.new("soul_end", 0.2)
     Audio.new("soul_reactive", 0.05)
+    Audio.new("ending", 0.2)
     Audio.new("music", 0.2, {type = "stream", channel = "music", loop = true})
 
     Color.bg = rgb(5, 1, 59)
@@ -38,6 +39,7 @@ return function ()
         checkpoint = {"checkpoint"},
         key = {"key"},
         solid = {"door"},
+        ending = {"ending"},
     }
 
     TILE_SIZE = 16

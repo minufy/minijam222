@@ -12,6 +12,7 @@ local draw_order = {
     "text",
     "spike",
     "moving_spike",
+    "ending",
 }
 local tiles_back_alpha = 0.4
 

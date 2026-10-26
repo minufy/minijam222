@@ -5,7 +5,6 @@ local levitate_radius = 16
 Animation.new("player_idle", 1, 2, 50)
 Animation.new("player_walk", 1, 4, 7)
 Animation.new("player_jump", 1, 1, 0)
-Image.new("player_soul")
 
 return function (Player)
     function Player:init_draw()

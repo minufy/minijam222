@@ -15,6 +15,7 @@ return function (Player)
         Game:dist(self, FILTERS.soul, self.col_soul, dists.item)
         Game:dist(self, FILTERS.checkpoint, self.col_checkpoint, dists.item)
         Game:dist(self, FILTERS.key, self.col_key, dists.item)
+        Game:col(self, FILTERS.ending, self.col_ending)
 
         if self.y > Game:tile_height() then
             self:die()
@@ -23,6 +24,10 @@ return function (Player)
 
     function Player:col_spike(other)
         self:die()
+    end
+
+    function Player:col_ending(other)
+        SM:load("ending")
     end
 
     function Player:col_key(other)
