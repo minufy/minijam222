@@ -55,3 +55,7 @@ end
 function love.resize(w, h)
     Res:resize(w, h)
 end
+
+function love.focus(f)
+    SM:focus(f)
+end

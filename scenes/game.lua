@@ -65,4 +65,8 @@ function Game:tile_height()
     return tiles.cells_y*TILE_SIZE
 end
 
+function Game:focus(f)
+    Audio.resume("music")
+end
+
 return Game
