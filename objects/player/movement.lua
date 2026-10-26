@@ -1,5 +1,5 @@
-local speed = 2.0
-local air_speed = 2.2
+local speed = 1.9
+local air_speed = 2.1
 local gravity = 0.38
 local jump_force = 4.2
 local max_vy = 5

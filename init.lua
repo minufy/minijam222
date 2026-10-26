@@ -32,6 +32,7 @@ return function ()
     LIGHT_ALPHA = 0.02
     FILTERS = {
         spike = {"spike"},
+        moving_spike = {"moving_spike"},
         soul = {"soul"},
         checkpoint = {"checkpoint"},
         key = {"key"},

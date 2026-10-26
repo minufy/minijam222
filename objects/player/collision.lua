@@ -1,5 +1,6 @@
 local dists = {
     spike = TILE_SIZE*0.5,
+    moving_spike = TILE_SIZE*0.9,
     item = TILE_SIZE*0.9,
 }
 
@@ -10,6 +11,7 @@ return function (Player)
 
     function Player:update_collision(dt)
         Game:dist(self, FILTERS.spike, self.col_spike, dists.spike)
+        Game:dist(self, FILTERS.moving_spike, self.col_spike, dists.moving_spike)
         Game:dist(self, FILTERS.soul, self.col_soul, dists.item)
         Game:dist(self, FILTERS.checkpoint, self.col_checkpoint, dists.item)
         Game:dist(self, FILTERS.key, self.col_key, dists.item)

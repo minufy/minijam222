@@ -10,6 +10,7 @@ local draw_order = {
     "door",
     "tiles",
     "spike",
+    "moving_spike",
 }
 local tiles_back_alpha = 0.4
 
