@@ -25,11 +25,13 @@ return function ()
     Audio.new("ending", 0.2)
     Audio.new("music", 0.2, {type = "stream", channel = "music", loop = true})
 
-    Color.bg = rgb(5, 1, 59)
-
     Camera.x_damp = 0.1
     Camera.y_damp = 0.05
     Camera.shake_damp = 0.25
+
+    COLORS = {
+
+    }
 
     LIGHT_ALPHA = 0.02
     FILTERS = {

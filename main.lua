@@ -9,6 +9,7 @@ require("rebase.log")
 require("rebase.physics")
 require("rebase.res")
 require("rebase.shaders")
+require("rebase.smooth")
 require("rebase.timer")
 require("rebase.utils")
 
