@@ -27,7 +27,7 @@ return function (Player)
             self.flip = flip
         end
 
-        self.draw_bounce = self.draw_bounce-self.draw_bounce*bounce_damp*dt
+        self.draw_bounce = self.draw_bounce-self.draw_bounce*Damp(dt, bounce_damp)
 
         if self.levitating then
             if self.particle_timer:run(dt) then

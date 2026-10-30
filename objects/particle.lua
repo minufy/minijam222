@@ -30,10 +30,10 @@ function Particle:update(dt)
     self.x = self.x+self.mx*dt
     self.y = self.y+self.my*dt
 
-    self.mx = self.mx-self.mx*move_damp*dt
-    self.my = self.my-self.my*move_damp*dt
+    self.mx = self.mx-self.mx*Damp(dt, move_damp)
+    self.my = self.my-self.my*Damp(dt, move_damp)
 
-    self.size = self.size-self.size*size_damp*dt
+    self.size = self.size-self.size*Damp(dt, size_damp)
     if self.size < size_thresh then
         self.remove = true
     end

@@ -41,8 +41,8 @@ function SparkParticle:update(dt)
     self.x = self.x+math.cos(self.angle)*self.speed*dt
     self.y = self.y+math.sin(self.angle)*self.speed*dt
 
-    self.speed = self.speed-self.speed*speed_damp*dt
-    self.size = self.size-self.size*size_damp*dt
+    self.speed = self.speed-self.speed*Damp(dt, speed_damp)
+    self.size = self.size-self.size*Damp(dt, size_damp)
     if self.size < size_thresh then
         self.remove = true
     end
