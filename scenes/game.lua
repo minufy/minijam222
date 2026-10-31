@@ -32,6 +32,11 @@ function Game:draw()
 
     Camera:stop()
     Shaders.shadow:stop()
+
+    love.graphics.setColor(1, 1, 1, 0.2)
+    love.graphics.setFont(Font)
+    love.graphics.print("jam version", 10, 10)
+    Color.reset()
 end
 
 ---@generic T
